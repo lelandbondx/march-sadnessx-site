@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@March_SadnessX AI Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Rajdhani', sans-serif; background: #000000; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,0,0.01) 2px, rgba(0,255,0,0.01) 4px), repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(0,255,0,0.02) 50px, rgba(0,255,0,0.02) 100px); color: #00ff00; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,255,0,0.005) 1px, rgba(0,255,0,0.005) 2px); pointer-events: none; z-index: 1; opacity: 0.2; }
+        .header { text-align: center; padding: 2rem; background: rgba(0,0,0,0.95); border-bottom: 3px solid #00ff00; box-shadow: 0 0 20px rgba(0,255,0,0.2), inset 0 0 10px rgba(0,255,0,0.05); position: relative; z-index: 2; animation: flicker 3s infinite alternate; }
+        @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; } 20%, 24%, 55% { opacity: 0.95; } }
+        .header h1 { font-family: 'Press Start 2P', cursive; font-size: 1.5rem; margin: 0; background: linear-gradient(45deg, #00ff00, #00aa00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 5px #00ff00; letter-spacing: 4px; animation: glitch 1.5s linear infinite; }
+        @keyframes glitch { 2%, 64% { transform: translate(2px, 0) skew(0deg); } 4%, 60% { transform: translate(-2px, 0) skew(0deg); } 62% { transform: translate(0, 0) skew(5deg); } }
+        .header p { font-family: monospace; font-size: 0.8rem; color: #00ff00; text-shadow: 0 0 3px #00ff00; margin: 0.5rem 0; }
+        .contact { font-size: 0.7rem; color: #00aa00; text-shadow: 0 0 3px #00aa00; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; padding: 2rem; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .art-item { aspect-ratio: 1; overflow: hidden; border-radius: 0; border: 2px solid #00ff00; box-shadow: 0 0 10px rgba(0,255,0,0.1), inset 0 0 5px rgba(0,255,0,0.02); cursor: pointer; transition: all 0.3s ease; background: #000; position: relative; pointer-events: all; }
+        .art-item:hover { transform: scale(1.05) rotate(1deg); box-shadow: 0 0 20px rgba(0,255,0,0.2), 0 0 30px rgba(0,255,0,0.1); animation: rgbShift 0.5s ease-in-out; border-color: #00aa00; }
+        @keyframes rgbShift { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(120deg); } }
+        .art-item img, .art-item video { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) brightness(1.1); transition: filter 0.3s; pointer-events: none; }
+        .art-item:hover img, .art-item:hover video { filter: contrast(1.5) brightness(1.2) sepia(0.1); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>@March_SadnessX</h1>
+        <p>Artificial Imagination</p>
+        <p class="contact">lelandbondx@gmail.com</p>
+    </div>
+    <div id="gallery" class="gallery"></div>
+    <script>
+        const gallery = document.getElementById('gallery');
+        const mediaItems = [
+            {type: 'photo', url: 'https://pbs.twimg.com/media/G040tqFWIAAUj9I.jpg', alt: 'Ceremonial armor initiated'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/G0h-XFRWUAAFR-K.jpg', alt: '˥ƖʌƎ-┴ϛNᴉɐƃ∀‾ƎsƖɹ :uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/G0VcUAyWwAAgQn9.jpg', alt: 'Prompt: Island'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/G0SqXVZWEAAMKBB.jpg', alt: 'Ⅎ˥oפ‾ϛʇǝ˥ :ʇɥƃnoɥ┴'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/Gz8CvMwXQAAb7gl.jpg', alt: 'Tremendous Dragon Day'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzzaD3XXkAAsLNn.jpg', alt: 'Best image today'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzzYfT_WIAAoH4M.jpg', alt: 'ƐƆɐɹ‾ϛ’ʇǝ˥ :ʇɥƃnoɥ┴'},
+            {type: 'video', url: 'https://video.twimg.com/amplify_video/1962323850969890816/vid/avc1/356x270/paIC__Ymr1EuV8hp.mp4', alt: '⅄u0ɥdɯʎϛ-‾ɹɐunl :uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GznoRXtXAAAVKUT.jpg', alt: 'ɹǝllǝʍp‾dnƆ :uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzhTGzqXcAAQKr8.jpg', alt: 'pǝʇɐʌɐɔxƎ ǝɯo┴ ʇuǝᴉɔu∀'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzhSZiCXkAAz7dN.jpg', alt: 'ƃuᴉɹdS‾uǝʇʇoƃɹoℲ The :uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzZ-AOxXgAAF58C.jpg', alt: 'ɹǝllǝʍp ǝʇɐl'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzUsL0fWEAAna9y.jpg', alt: 'Dᴉ0Λ‾533kER :Pilot'},
+            {type: 'video', url: 'https://video.twimg.com/amplify_video/1960282932427325442/vid/avc1/320x422/hHdEqlm-UAfBqZuD.mp4', alt: 'GM. Server room located. Activate cloaking device.'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GzFcXoFXkAAGh2V.jpg', alt: '_lost*crabKingdom'},
+            {type: 'video', url: 'https://video.twimg.com/amplify_video/1958330518447005697/vid/avc1/320x320/KM9IxEVV88TDluw4.mp4', alt: 'Λ┴//SW//ɹƆ:uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GywzX-7WAAA-Wq5.jpg', alt: '┴‾ɹƆ :ɯɐǝɹD'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GycKVRLWYAAsA-G.jpg', alt: 'ƎnuR_-_qɐɹC‾ :uoᴉsᴉΛ'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GyPk0DcW0AAM1_F.jpg', alt: 'Epic Dragon Day!'},
+            {type: 'photo', url: 'https://pbs.twimg.com/media/GyMcIyAW8AEJF8X.jpg', alt: 'ɹƎpN∀M :uoᴉsᴉΛ'}
+        ];
+        function displayGallery() {
+            gallery.innerHTML = '';
+            mediaItems.forEach((item) => {
+                const artItem = document.createElement('div');
+                artItem.className = 'art-item';
+                artItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openNewTab(item);
+                });
+                if (item.type === 'photo') {
+                    const img = document.createElement('img');
+                    img.src = item.url;
+                    img.alt = item.alt;
+                    img.onerror = () => img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAwMDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJQcmVzczMgU3RhcnQgMlAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiMwMGZmMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5NQVRSSVggR0xJVENIPC90ZXh0Pjwvc3ZnPg==';
+                    artItem.appendChild(img);
+                } else if (item.type === 'video') {
+                    const video = document.createElement('video');
+                    video.src = item.url;
+                    video.muted = true;
+                    video.loop = true;
+                    video.playsInline = true;
+                    video.alt = item.alt;
+                    artItem.appendChild(video);
+                }
+                gallery.appendChild(artItem);
+            });
+        }
+        function openNewTab(item) {
+            const newWindow = window.open('', '_blank', 'width=800,height=600');
+            let mediaHTML = '';
+            if (item.type === 'photo') {
+                mediaHTML = `<img src="${item.url}" alt="${item.alt}" style="max-width:100%; max-height:70vh; border:2px solid #00ff00; box-shadow:0 0 20px #00ff00;">`;
+            } else if (item.type === 'video') {
+                mediaHTML = `<video src="${item.url}" controls autoplay loop muted style="max-width:100%; max-height:70vh; border:2px solid #00ff00; box-shadow:0 0 20px #00ff00;"></video>`;
+            }
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${item.alt} - @March_SadnessX</title>
+                    <style>
+                        body { background: #000; color: #00ff00; font-family: monospace; text-align: center; margin: 0; padding: 20px; }
+                        h1 { font-size: 1.2rem; text-shadow: 0 0 10px #00ff00; }
+                        button { background: #00ff00; color: #000; padding: 10px 20px; border: 1px solid #00ff00; cursor: pointer; font-family: monospace; }
+                        button:hover { box-shadow: 0 0 10px #00ff00; }
+                    </style>
+                </head>
+                <body>
+                    <h1>${item.alt}</h1>
+                    ${mediaHTML}
+                    <br><br>
+                    <button onclick="window.location='mailto:lelandbondx@gmail.com?subject=Order ${encodeURIComponent(item.alt)} T-Shirt $45&body=Hi,\\n\\nI'd like to purchase the t-shirt with this AI art:\\nTitle: ${encodeURIComponent(item.alt)}\\nImage/Video URL: ${item.url}\\n\\nShipping details: [your address]\\nPayment: [PayPal/Venmo info]\\n\\nThanks!';">Purchase on T-Shirt - $45</button>
+                </body>
+                </html>
+            `;
+            newWindow.document.write(htmlContent);
+            newWindow.document.close();
+        }
+        displayGallery();
+    </script>
+</body>
+</html>
